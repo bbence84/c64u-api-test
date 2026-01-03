@@ -15,11 +15,11 @@ async def reset_machine_soft() -> dict:
     return result
 
 async def run_prg_binary(prg_data_binary: bytes) -> dict:
-    base64_str = base64.b64encode(prg_data_binary).decode().strip()
-    try:
-        prg_data = base64.b64decode(base64_str, validate=True)
-    except Exception as e:
-        print(f"Error during base64 decoding")
+    # base64_str = base64.b64encode(prg_data_binary).decode().strip()
+    # try:
+    #     prg_data = base64.b64decode(base64_str, validate=True)
+    # except Exception as e:
+    #     print(f"Error during base64 decoding")
 
     url = f"{API_BASE}/v1/runners:run_prg"
 
@@ -27,7 +27,7 @@ async def run_prg_binary(prg_data_binary: bytes) -> dict:
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 url, 
-                data=prg_data, 
+                data=prg_data_binary, 
                 headers={'Content-Type': 'application/octet-stream'},
                 timeout=aiohttp.ClientTimeout(total=5)
             ) as response:
@@ -39,7 +39,7 @@ async def run_prg_binary(prg_data_binary: bytes) -> dict:
                     result = {
                         "success": True,
                         "message": f"Program sent and started successfully via API.",
-                        "size_bytes": len(prg_data),
+                        "size_bytes": len(prg_data_binary),
                         "response": response_data
                     }
                 else:
