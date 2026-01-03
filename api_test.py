@@ -90,7 +90,7 @@ if __name__ == "__main__":
     print(result)   
 
     # Test 3: reset the machine again
-    time.sleep(5)  # wait a bit before next test
+    time.sleep(15)  # wait a bit before next test
     result = asyncio.run(reset_machine_soft())
     print(result)
 
