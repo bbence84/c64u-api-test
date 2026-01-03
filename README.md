@@ -12,4 +12,4 @@
 
 3. Execute test script:
 
-    `python .\api_test.py`
+    `python .\api_test_new.py`
